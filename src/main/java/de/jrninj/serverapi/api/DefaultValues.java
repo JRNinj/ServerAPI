@@ -13,7 +13,7 @@ public class DefaultValues {
 
         try {
 
-            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.messagesFile);
+            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getMessagesFile());
 
             if(config.get("Messages.Keine Rechte (Fehler)") == null) {
                 return "&4Dafür hast du keine Rechte!";
@@ -32,7 +32,7 @@ public class DefaultValues {
     public static String getMySQLHost() {
         try {
 
-            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.messagesFile);
+            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getMessagesFile());
 
             if(config.get("Information.MySQL Host") == null) {
                 return "§4Kein Config Eintrag gefunden!";
@@ -49,7 +49,7 @@ public class DefaultValues {
     public static String getMySQLUser() {
         try {
 
-            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.messagesFile);
+            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getMessagesFile());
 
             if(config.get("Information.MySQL Benutzername") == null) {
                 return "§4Kein Config Eintrag gefunden!";
@@ -66,7 +66,7 @@ public class DefaultValues {
     public static String getMySQLPassword() {
         try {
 
-            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.messagesFile);
+            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getMessagesFile());
 
             if(config.get("Information.MySQL Passwort") == null) {
                 return "§4Kein Config Eintrag gefunden!";
@@ -83,7 +83,7 @@ public class DefaultValues {
     public static String getMySQLDatabase() {
         try {
 
-            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.messagesFile);
+            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getMessagesFile());
 
             if(config.get("Information.MySQL Datenbank") == null) {
                 return "§4Kein Config Eintrag gefunden!";
@@ -100,7 +100,7 @@ public class DefaultValues {
     public static String getMySQLTable() {
         try {
 
-            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.messagesFile);
+            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getMessagesFile());
 
             if(config.get("Information.MySQL Tabelle") == null) {
                 return "§4Kein Config Eintrag gefunden!";

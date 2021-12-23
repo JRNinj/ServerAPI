@@ -12,7 +12,7 @@ public class PlayerData {
     public static String getUUID(String username) {
         try {
 
-            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.file);
+            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getFile());
 
             for(String s : config.getSection("Players").getKeys()) {
 
@@ -31,7 +31,7 @@ public class PlayerData {
     public static String getUsername(String uuid) {
         try {
 
-            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.file);
+            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getFile());
 
             if(!config.contains("Players." + uuid + ".name")) {
                 return "§4The UUID not exist in our system!";

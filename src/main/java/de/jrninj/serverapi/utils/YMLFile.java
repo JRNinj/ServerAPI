@@ -7,25 +7,48 @@ import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class YMLFile {
 
-    public static File file = new File(ServerAPI.getPlugin().getDataFolder().getPath() + "/../../../configs", "players.yml");
-    public static File messagesFile = new File(ServerAPI.getPlugin().getDataFolder().getPath() + "/../../../configs", "messages.yml");
+    private static File primalConfig = new File(ServerAPI.getPlugin().getDataFolder().getPath(), "config.yml");
 
-    public static void fileCreations(){
+    public static void fileCreations() {
 
         try {
+            if (!ServerAPI.getPlugin().getDataFolder().exists()) {
+                ServerAPI.getPlugin().getDataFolder().mkdir();
+            }
+
+            //Primal Config
+            if (!primalConfig.exists()) {
+                primalConfig.createNewFile();
+
+                Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(primalConfig);
+
+                config.set("Paths.Speicherpfad (vom ServerAPI Pluginordner ausgesehen)", "/../../configs");
+
+                ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, primalConfig);
+            }
+
+            //Create Directory
+            Path saveDirectory = Paths.get(ServerAPI.getPlugin().getDataFolder().getPath() + ConfigurationProvider.getProvider(YamlConfiguration.class).load(primalConfig).getString("Paths.Speicherpfad (vom ServerAPI Pluginordner ausgesehen)"));
+            if (!Files.exists(saveDirectory)) {
+                Files.createDirectories(saveDirectory);
+            }
+
             //File
-            if (!file.exists()) {
-                file.createNewFile();
+            if (!getFile().exists()) {
+                getFile().createNewFile();
             }
 
             //Messages
-            if (!messagesFile.exists()) {
-                messagesFile.createNewFile();
+            if (!getMessagesFile().exists()) {
+                getMessagesFile().createNewFile();
 
-                Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(messagesFile);
+                Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getMessagesFile());
 
                 config.set("Messages.Server Prefix", "&6Time&cTravel &0>> &7");
                 config.set("Messages.Keine Rechte (Fehler)", "&4Dafür hast du keine Rechte!");
@@ -35,7 +58,7 @@ public class YMLFile {
                 config.set("Information.MySQL Datenbank", "DBX35Q");
                 config.set("Information.MySQL Tabelle", "table");
 
-                ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, messagesFile);
+                ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, getMessagesFile());
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -43,4 +66,21 @@ public class YMLFile {
 
     }
 
+    public static File getFile() {
+        try {
+            return new File(ServerAPI.getPlugin().getDataFolder().getPath() + ConfigurationProvider.getProvider(YamlConfiguration.class).load(primalConfig).getString("Paths.Speicherpfad (vom ServerAPI Pluginordner ausgesehen)"), "players.yml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static File getMessagesFile() {
+        try {
+            return new File(ServerAPI.getPlugin().getDataFolder().getPath() + ConfigurationProvider.getProvider(YamlConfiguration.class).load(primalConfig).getString("Paths.Speicherpfad (vom ServerAPI Pluginordner ausgesehen)"), "messages.yml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

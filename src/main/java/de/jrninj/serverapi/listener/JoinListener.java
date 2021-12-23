@@ -18,13 +18,13 @@ public class JoinListener implements Listener {
         ProxiedPlayer player = e.getPlayer();
 
         try {
-            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.file);
+            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getFile());
 
             if(config.get("Players." + player.getUniqueId().toString()) == null) {
 
                 config.set("Players." + player.getUniqueId().toString() + ".name", player.getName());
 
-                ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, YMLFile.file);
+                ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, YMLFile.getFile());
 
             }
 

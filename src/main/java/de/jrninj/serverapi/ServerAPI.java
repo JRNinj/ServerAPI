@@ -43,7 +43,7 @@ public final class ServerAPI extends Plugin {
     public static String getPrefix() {
         try {
 
-            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.messagesFile);
+            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getMessagesFile());
 
             if(config.get("Messages.Server Prefix") == null) {
                 return "§6Time§cTravel §0>> §7";
