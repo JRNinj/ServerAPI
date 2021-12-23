@@ -10,15 +10,12 @@ import java.io.IOException;
 
 public class YMLFile {
 
-    public static File file = new File(ServerAPI.getPlugin().getDataFolder().getPath(), "players.yml");
-    public static File messagesFile = new File(ServerAPI.getPlugin().getDataFolder().getPath(), "messages.yml");
+    public static File file = new File(ServerAPI.getPlugin().getDataFolder().getPath() + "/../../../configs", "players.yml");
+    public static File messagesFile = new File(ServerAPI.getPlugin().getDataFolder().getPath() + "/../../../configs", "messages.yml");
 
     public static void fileCreations(){
 
         try {
-            if(!ServerAPI.getPlugin().getDataFolder().exists()) {
-                ServerAPI.getPlugin().getDataFolder().mkdir();
-            }
             //File
             if (!file.exists()) {
                 file.createNewFile();
