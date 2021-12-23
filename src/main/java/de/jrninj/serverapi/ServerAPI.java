@@ -1,6 +1,5 @@
 package de.jrninj.serverapi;
 
-import de.jrninj.serverapi.api.DefaultValues;
 import de.jrninj.serverapi.listener.JoinListener;
 import de.jrninj.serverapi.utils.YMLFile;
 import net.md_5.bungee.api.plugin.Plugin;
