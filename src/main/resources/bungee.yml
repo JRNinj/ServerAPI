@@ -1,0 +1,4 @@
+name: ServerAPI
+version: '${project.version}'
+main: de.jrninj.serverapi.ServerAPI
+description: This is the Official Server API of the TimeTravelStudios Network
