@@ -1,6 +1,7 @@
 package de.jrninj.serverapi;
 
 import de.jrninj.serverapi.listener.JoinListener;
+import de.jrninj.serverapi.mysql.MySQL;
 import de.jrninj.serverapi.utils.YMLFile;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
@@ -21,12 +22,38 @@ public final class ServerAPI extends Plugin {
 
         register();
 
+        //MySQL laden
+        try {
+            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.primalConfig);
+
+            if(config.getBoolean("Settings.MySQL")) {
+                MySQL.connect();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        getProxy().getConsole().sendMessage(getPrefix() + "§2Die ServerAPI wurde erfolgreich aktiviert!");
+
     }
 
     @Override
     public void onDisable() {
 
+        //MySQL entladen
+        try {
+            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.primalConfig);
 
+            if(config.getBoolean("Settings.MySQL")) {
+                MySQL.disconnect();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        getProxy().getConsole().sendMessage(getPrefix() + "§cDie ServerAPI wurde deaktiviert!");
 
     }
 
