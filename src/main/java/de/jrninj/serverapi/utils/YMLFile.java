@@ -51,7 +51,7 @@ public class YMLFile {
 
                 Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getMessagesFile());
 
-                config.set("Messages.Server Prefix", "&6Time&cTravel &0>> &7");
+                config.set("Messages.Server Prefix", "§5Shulker§6Games §0>> §7");
                 config.set("Messages.Keine Rechte (Fehler)", "&4Dafür hast du keine Rechte!");
                 config.set("Information.MySQL Host", "xxx.mysql.de");
                 config.set("Information.MySQL Port", "3306");

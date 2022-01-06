@@ -13,6 +13,8 @@ public class MySQL {
 
     private static Connection connection;
 
+    //Info
+
     public static String getMySQLHost() {
         try {
 
@@ -115,6 +117,8 @@ public class MySQL {
         return "§4Kein Config Eintrag gefunden!";
     }
 
+    //Connection
+
     public static void connect() {
         if (!isConnected()) {
             try {
@@ -158,6 +162,10 @@ public class MySQL {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static Connection getConnection() {
+        return connection;
     }
 
 }

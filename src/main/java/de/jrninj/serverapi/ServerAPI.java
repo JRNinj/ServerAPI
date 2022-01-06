@@ -9,6 +9,7 @@ import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
 
 public final class ServerAPI extends Plugin {
 
@@ -73,7 +74,7 @@ public final class ServerAPI extends Plugin {
             Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getMessagesFile());
 
             if(config.get("Messages.Server Prefix") == null) {
-                return "§6Time§cTravel §0>> §7";
+                return "§5Shulker§6Games §0>> §7";
             }
 
             String s = config.getString("Messages.Server Prefix");
