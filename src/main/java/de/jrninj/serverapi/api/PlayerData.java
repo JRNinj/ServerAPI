@@ -25,7 +25,7 @@ public class PlayerData {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return "§4The Username not exist in our system!";
+        return null;
     }
 
     public static String getUsername(String uuid) {
@@ -34,7 +34,7 @@ public class PlayerData {
             Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getFile());
 
             if(!config.contains("Players." + uuid + ".name")) {
-                return "§4The UUID not exist in our system!";
+                return null;
             }
 
             return config.getString("Players." + uuid + ".name");
@@ -42,7 +42,7 @@ public class PlayerData {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return "§4The UUID not exist in our system!";
+        return null;
     }
 
 }

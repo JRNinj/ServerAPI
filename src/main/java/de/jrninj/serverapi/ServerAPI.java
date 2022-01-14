@@ -1,5 +1,7 @@
 package de.jrninj.serverapi;
 
+import de.jrninj.serverapi.listener.ConnectionListener;
+import de.jrninj.serverapi.coins.PlayerManager;
 import de.jrninj.serverapi.listener.JoinListener;
 import de.jrninj.serverapi.mysql.MySQL;
 import de.jrninj.serverapi.utils.YMLFile;
@@ -9,11 +11,11 @@ import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
 
 public final class ServerAPI extends Plugin {
 
     private static ServerAPI plugin;
+    private PlayerManager playerManager;
 
     @Override
     public void onEnable() {
@@ -29,7 +31,8 @@ public final class ServerAPI extends Plugin {
 
             if(config.getBoolean("Settings.MySQL")) {
                 MySQL.connect();
-            }
+            } else
+                getProxy().getConsole().sendMessage(ServerAPI.getPrefix() + "§4MySQL ist derzeit deaktiviert, gehe in die Config um es zu aktivieren!");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,8 +62,12 @@ public final class ServerAPI extends Plugin {
     }
 
     public void register() {
+        //Other Stuff
+        playerManager = new PlayerManager();
+
         //Listener
         getProxy().getPluginManager().registerListener(this, new JoinListener());
+        getProxy().getPluginManager().registerListener(this, new ConnectionListener(this));
 
     }
 
@@ -85,5 +92,9 @@ public final class ServerAPI extends Plugin {
             ex.printStackTrace();
         }
         return "§6Time§cTravel §0>> §7";
+    }
+
+    public PlayerManager getPlayerManager() {
+        return playerManager;
     }
 }
