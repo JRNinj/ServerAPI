@@ -30,6 +30,7 @@ public class YMLFile {
 
                 config.set("Paths.Speicherpfad (vom ServerAPI Pluginordner ausgesehen)", "/../../configs");
                 config.set("Settings.MySQL", false);
+                config.set("Settings.Lobby Server", false);
 
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, primalConfig);
             }

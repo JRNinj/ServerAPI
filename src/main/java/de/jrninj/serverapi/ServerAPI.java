@@ -1,5 +1,6 @@
 package de.jrninj.serverapi;
 
+import de.jrninj.serverapi.inbox.InboxListener;
 import de.jrninj.serverapi.listener.ConnectionListener;
 import de.jrninj.serverapi.coins.PlayerManager;
 import de.jrninj.serverapi.listener.JoinListener;
@@ -68,6 +69,7 @@ public final class ServerAPI extends Plugin {
         //Listener
         getProxy().getPluginManager().registerListener(this, new JoinListener());
         getProxy().getPluginManager().registerListener(this, new ConnectionListener(this));
+        getProxy().getPluginManager().registerListener(this, new InboxListener());
 
     }
 
