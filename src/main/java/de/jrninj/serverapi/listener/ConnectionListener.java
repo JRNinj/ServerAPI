@@ -20,7 +20,7 @@ public class ConnectionListener implements Listener {
         ProxiedPlayer player = event.getPlayer();
         CustomPlayer playerData = new CustomPlayer(plugin, player.getUniqueId());
 
-        plugin.getPlayerManager().addCustomPlayer(player.getUniqueId(),playerData);
+        plugin.getPlayerManager().addCustomPlayer(player.getUniqueId(), playerData);
         player.sendMessage("§c---------------------------");
         player.sendMessage("§7Das erste Mal gejoint: §6" + playerData.getFirstTimeJoined());
         player.sendMessage("§c---------------------------");

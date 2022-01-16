@@ -33,12 +33,13 @@ public class CustomPlayer {
             statement.executeQuery();
             ResultSet rs = statement.executeQuery();
             if(rs.next()){
+
                 timestamp = rs.getDate("FIRST_JOINED");
                 coins = rs.getInt("COINS");
                 euros = rs.getInt("EUROS");
 
 
-            }else {
+            } else {
                 Long datetime = System.currentTimeMillis();
                 timestamp = new Date(datetime);
                 coins = 10;

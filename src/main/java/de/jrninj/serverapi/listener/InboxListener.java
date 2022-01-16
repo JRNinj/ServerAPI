@@ -1,6 +1,7 @@
-package de.jrninj.serverapi.inbox;
+package de.jrninj.serverapi.listener;
 
 import de.jrninj.serverapi.ServerAPI;
+import de.jrninj.serverapi.inbox.Inbox;
 import de.jrninj.serverapi.utils.YMLFile;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PostLoginEvent;

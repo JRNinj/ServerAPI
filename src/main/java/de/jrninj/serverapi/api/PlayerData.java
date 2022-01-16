@@ -1,48 +1,69 @@
 package de.jrninj.serverapi.api;
 
+import de.jrninj.serverapi.mysql.MySQL;
 import de.jrninj.serverapi.utils.YMLFile;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class PlayerData {
 
     public static String getUUID(String username) {
+
         try {
 
-            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getFile());
+            PreparedStatement statement = MySQL.getConnection().prepareStatement("SELECT UUID FROM players WHERE USERNAME = ?;");
 
-            for(String s : config.getSection("Players").getKeys()) {
+            statement.setString(1, username);
+            statement.executeQuery();
 
-                if(config.getString("Players." + s + ".name").equals(username)) {
-                    return s;
-                }
+            ResultSet resultSet = statement.executeQuery();
 
-            }
+            if(resultSet.next()) {
 
-        } catch (IOException ex) {
-            ex.printStackTrace();
+                return resultSet.getString("UUID");
+
+            } else
+                return null;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
         return null;
+
     }
 
     public static String getUsername(String uuid) {
+
         try {
 
-            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.getFile());
+            PreparedStatement statement = MySQL.getConnection().prepareStatement("SELECT USERNAME FROM players WHERE UUID = ?;");
 
-            if(!config.contains("Players." + uuid + ".name")) {
+            statement.setString(1, uuid);
+            statement.executeQuery();
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()) {
+
+                return resultSet.getString("USERNAME");
+
+            } else
                 return null;
-            }
 
-            return config.getString("Players." + uuid + ".name");
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
         return null;
+
     }
 
 }

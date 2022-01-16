@@ -41,11 +41,6 @@ public class YMLFile {
                 Files.createDirectories(saveDirectory);
             }
 
-            //File
-            if (!getFile().exists()) {
-                getFile().createNewFile();
-            }
-
             //Messages
             if (!getMessagesFile().exists()) {
                 getMessagesFile().createNewFile();
@@ -67,15 +62,6 @@ public class YMLFile {
             ex.printStackTrace();
         }
 
-    }
-
-    public static File getFile() {
-        try {
-            return new File(ServerAPI.getPlugin().getDataFolder().getPath() + ConfigurationProvider.getProvider(YamlConfiguration.class).load(primalConfig).getString("Paths.Speicherpfad (vom ServerAPI Pluginordner ausgesehen)"), "players.yml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public static File getMessagesFile() {

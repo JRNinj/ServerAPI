@@ -1,9 +1,10 @@
 package de.jrninj.serverapi;
 
-import de.jrninj.serverapi.inbox.InboxListener;
+import de.jrninj.serverapi.api.PlayerData;
+import de.jrninj.serverapi.listener.InboxListener;
 import de.jrninj.serverapi.listener.ConnectionListener;
 import de.jrninj.serverapi.coins.PlayerManager;
-import de.jrninj.serverapi.listener.JoinListener;
+import de.jrninj.serverapi.listener.PlayerDataListener;
 import de.jrninj.serverapi.mysql.MySQL;
 import de.jrninj.serverapi.utils.YMLFile;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -67,7 +68,7 @@ public final class ServerAPI extends Plugin {
         playerManager = new PlayerManager();
 
         //Listener
-        getProxy().getPluginManager().registerListener(this, new JoinListener());
+        getProxy().getPluginManager().registerListener(this, new PlayerDataListener());
         getProxy().getPluginManager().registerListener(this, new ConnectionListener(this));
         getProxy().getPluginManager().registerListener(this, new InboxListener());
 
