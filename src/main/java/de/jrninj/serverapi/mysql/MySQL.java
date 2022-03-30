@@ -8,6 +8,7 @@ import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.concurrent.TimeUnit;
 
 public class MySQL {
 
@@ -166,6 +167,32 @@ public class MySQL {
 
     public static Connection getConnection() {
         return connection;
+    }
+
+    //Sessions
+
+    public static void startSession() {
+
+        ServerAPI.getPlugin().getProxy().getScheduler().schedule(ServerAPI.getPlugin(), new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.primalConfig);
+
+                    if(config.getBoolean("Settings.MySQL")) {
+                        if (isConnected()) {
+                            disconnect();
+                        }
+                        connect();
+                    } else
+                        ServerAPI.getPlugin().getProxy().getConsole().sendMessage(ServerAPI.getPrefix() + "§4MySQL ist derzeit deaktiviert, gehe in die Config um es zu aktivieren!");
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 0, 24, TimeUnit.HOURS);
+
     }
 
 }

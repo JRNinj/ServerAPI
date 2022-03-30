@@ -7,9 +7,6 @@ import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class YMLFile {
 
@@ -19,7 +16,7 @@ public class YMLFile {
 
         try {
             if (!ServerAPI.getPlugin().getDataFolder().exists()) {
-                ServerAPI.getPlugin().getDataFolder().mkdir();
+                ServerAPI.getPlugin().getDataFolder().mkdirs();
             }
 
             //Primal Config
@@ -28,17 +25,10 @@ public class YMLFile {
 
                 Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(primalConfig);
 
-                config.set("Paths.Speicherpfad (vom ServerAPI Pluginordner ausgesehen)", "/../../configs");
                 config.set("Settings.MySQL", false);
                 config.set("Settings.Lobby Server", false);
 
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, primalConfig);
-            }
-
-            //Create Directory
-            Path saveDirectory = Paths.get(ServerAPI.getPlugin().getDataFolder().getPath() + ConfigurationProvider.getProvider(YamlConfiguration.class).load(primalConfig).getString("Paths.Speicherpfad (vom ServerAPI Pluginordner ausgesehen)"));
-            if (!Files.exists(saveDirectory)) {
-                Files.createDirectories(saveDirectory);
             }
 
             //Messages
@@ -65,11 +55,6 @@ public class YMLFile {
     }
 
     public static File getMessagesFile() {
-        try {
-            return new File(ServerAPI.getPlugin().getDataFolder().getPath() + ConfigurationProvider.getProvider(YamlConfiguration.class).load(primalConfig).getString("Paths.Speicherpfad (vom ServerAPI Pluginordner ausgesehen)"), "messages.yml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return new File(ServerAPI.getPlugin().getDataFolder().getPath(), "messages.yml");
     }
 }

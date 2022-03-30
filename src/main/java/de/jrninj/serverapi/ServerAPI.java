@@ -28,17 +28,7 @@ public final class ServerAPI extends Plugin {
         register();
 
         //MySQL laden
-        try {
-            Configuration config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(YMLFile.primalConfig);
-
-            if(config.getBoolean("Settings.MySQL")) {
-                MySQL.connect();
-            } else
-                getProxy().getConsole().sendMessage(ServerAPI.getPrefix() + "§4MySQL ist derzeit deaktiviert, gehe in die Config um es zu aktivieren!");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        MySQL.startSession();
 
         getProxy().getConsole().sendMessage(getPrefix() + "§2Die ServerAPI wurde erfolgreich aktiviert!");
 
